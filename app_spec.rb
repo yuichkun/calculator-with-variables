@@ -9,9 +9,12 @@ RSpec.describe App do
     it 'splits strings into array of tokens' do
       expect(app.tokenize('1 + 2')).to eq(['1', '+', '2'])
     end
+    it 'properly handles multi-digits' do
+      expect(app.tokenize('11 +2')).to eq(['11', '+', '2'])
+    end
   end
 
-  describe '#parse' do
+  describe.skip '#parse' do
     let(:ast) { app.parse(tokens, {}) }
     let(:tokens) { ['1', '+', '1', '+', '2'] }
     let(:expected) do
