@@ -12,8 +12,35 @@ RSpec.describe App do
   end
 
   describe '#parse' do
-    it 'TBA' do
-      expect(app.parse).to eq('TBA')
+    let(:ast) { app.parse(tokens, {}) }
+    let(:tokens) { ['1', '+', '1', '+', '2'] }
+    let(:expected) do
+      {
+        type: 'PROGRAM',
+        body: {
+          type: 'BINARY_EXPRESSION',
+          left: {
+            type: 'LITERAL',
+            value: '1'
+          },
+          operator: '+',
+          right: {
+            type: 'BINARY_EXPRESSION',
+            left: {
+              type: 'LITERAL',
+              value: '1'
+            },
+            operator: '+',
+            right: {
+              type: 'LITERAL',
+              value: '2'
+            }
+          }
+        }
+      }
+    end
+    it 'creates ast from tokens' do
+      expect(ast).to eq(expected)
     end
   end
 end
