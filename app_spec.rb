@@ -14,6 +14,13 @@ RSpec.describe App do
     end
   end
 
+  describe '#concatenate_digits' do
+    let(:tokens) { ['1', '1', '+', '2']}
+    let(:concatenated_digits) { app.concatenate_digits(tokens) }
+    let(:expected) { ['11', '+', '2'] }
+    it { expect(concatenated_digits).to eq(expected) }
+  end
+
   describe.skip '#parse' do
     let(:ast) { app.parse(tokens, {}) }
     let(:tokens) { ['1', '+', '1', '+', '2'] }

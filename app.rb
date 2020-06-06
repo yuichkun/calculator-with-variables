@@ -9,7 +9,29 @@ class App
     str.reject! do |chr|
       chr == WHITE_SPACE
     end
-    
+    concatenate_digits(str)
+  end
+
+  def concatenate_digits (tokens)
+    concatenated = []
+
+    str_buffer = ''
+    until tokens.empty?
+      token = tokens.shift
+      if DIGITS.include? token
+        str_buffer += token
+      else
+        if str_buffer != ''
+          concatenated.push str_buffer
+          str_buffer = ''
+        end
+        concatenated.push token
+      end
+    end
+
+    concatenated.push(str_buffer) if str_buffer != ''
+
+    concatenated
   end
 
   def parse(tokens, ast)
